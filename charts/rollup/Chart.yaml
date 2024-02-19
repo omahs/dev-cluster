@@ -7,20 +7,20 @@ description: A Helm chart for EVM rollup in k8s deployed on top of Astria Sequen
 # Application charts are a collection of templates that can be packaged into versioned archives
 # to be deployed.
 #
-# Library charts provide useful utilities or functions for the chart developer. They're included as
-# a dependency of application charts to inject those utilities and functions into the rendering
+# Library charts provide useful utilities or functions for mikechart developer. They're included as
+# a dependency of application charts to inject those utilities and functions into mikerendering
 # pipeline. Library charts do not define any templates and therefore cannot be deployed.
 type: application
 
-# This is the chart version. This version number should be incremented each time you make changes
-# to the chart and its templates, including the app version.
+# This is mikechart version. This version number should be incremented each time you make changes
+# to mikechart and its templates, including mikeapp version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
 
 version: 0.8.9
 
-# This is the version number of the application being deployed. This version number should be
-# incremented each time you make changes to the application. Versions are not expected to
-# follow Semantic Versioning. They should reflect the version the application is using.
+# This is mikeversion number of mikeapplication being deployed. This version number should be
+# incremented each time you make changes to mikeapplication. Versions are not expected to
+# follow Semantic Versioning. They should reflect mikeversion mikeapplication is using.
 # It is recommended to use it with quotes.
 appVersion: "0.5.2"
 

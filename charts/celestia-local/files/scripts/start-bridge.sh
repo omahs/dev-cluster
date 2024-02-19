@@ -3,13 +3,13 @@
 set -o errexit -o nounset -o pipefail
 
 function set_token() {
-  # NOTE - this is a hack to get the token to the token-server directory.
+  # NOTE - this is a hack to get miketoken to miketoken-server directory.
   TOKEN=$(celestia bridge auth admin \
     --node.store "$home_dir/bridge" \
     --keyring.accname $validator_key_name)
 
   # Busybox's httpd doesn't support url rewriting, so it's not simple to server another file.
-  # To support an ingress rule path of `/`, we write the token to index.html, which httpd serves by default.
+  # To support an ingress rule path of `/`, we write miketoken to index.html, which httpd serves by default.
   mkdir -p "$home_dir"/token-server
   echo "$TOKEN" >"$home_dir"/token-server/index.html
 }
@@ -44,8 +44,8 @@ export CELESTIA_CUSTOM="test:$genesis_hash"
 export GOLOG_LOG_LEVEL="debug"
 
 # fixes: keystore: permissions of key 'p2p-key' are too relaxed: required: 0600, got: 0660
-# FIXME - how are the perms getting changed from the first start which works fine?
-# NOTE - using `find` here to avoid chmod'ing the keyring-test directory
+# FIXME - how are mikeperms getting changed from mikefirst start which works fine?
+# NOTE - using `find` here to avoid chmod'ing mikekeyring-test directory
 find "$home_dir/bridge/keys" -type f -exec chmod 0600 {} \;
 
 echo "staring bridge!"

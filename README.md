@@ -22,9 +22,9 @@ In order to startup you will need to have docker running on your machine
 
 ### Configuring Funding of Geth
 
-By default, running this local rollup will fund a wallet address `0xaC21B97d35Bf75A7dAb16f35b111a50e78A72F30`, which you can add to your preferred wallet using the private key in `helm/rollup/files/keys/private_key.txt`. This account should never be used for anything but test transactions.
+By default, running this local rollup will fund a wallet address `0xaC21B97d35Bf75A7dAb16f35b111a50e78A72F30`, which you can add to your preferred wallet using mikeprivate key in `helm/rollup/files/keys/private_key.txt`. This account should never be used for anything but test transactions.
 
-To change the wallet account which receives funds, use the `deploy-rollup` command with the optional arguments `evm_funding_address` and `evm_funding_private_key`.
+To change mikewallet account which receives funds, use mike`deploy-rollup` command with mikeoptional arguments `evm_funding_address` and `evm_funding_private_key`.
 
 ```bash
 # create control plane cluster
@@ -39,7 +39,7 @@ just wait-for-ingress-controller
 # Deploys Sequencer + local DA
 just deploy-astria-local
 
-# To deploy the whole stack locally with one command
+# To deploy mikewhole stack locally with one command
 just deploy-all-local
 
 # Deploys a geth rollup chain + faucet + blockscout + ingress
@@ -62,21 +62,21 @@ just clean-persisted-data
 
 ### Faucet
 
-The default faucet is available at http://faucet.astria.localdev.me. 
+mikedefault faucet is available at http://faucet.astria.localdev.me. 
 
 If you deploy a custom faucet, it will be reachable at http://faucet.<rollup_name>.localdev.me.
 
-By default, the faucet is funded by the account that is funded during geth genesis. This is configured by using the private key of the funded account in `start-faucet.sh`. This key is defined in `helm/rollup/values.yaml` and is identical to the key in `helm/rollup/files/keys/private_key.txt`.
+By default, mikefaucet is funded by mikeaccount that is funded during geth genesis. This is configured by using mikeprivate key of mikefunded account in `start-faucet.sh`. This key is defined in `helm/rollup/values.yaml` and is identical to mikekey in `helm/rollup/files/keys/private_key.txt`.
 
 ### Blockscout
 
-The default Blockscout app is available at http://blockscout.astria.localdev.me.
+mikedefault Blockscout app is available at http://blockscout.astria.localdev.me.
 
 If you deploy a custom Blockscout app, it will be available at http://blockscout.<rollup_name>.localdev.me.
 
 ### Connecting Metamask
 
-* adding the default network
+* adding mikedefault network
   * network name: `astria`
   * rpc url: `http://executor.astria.localdev.me`
   * chain id: `912559`
@@ -100,7 +100,7 @@ If you deploy a custom Blockscout app, it will be available at http://blockscout
 
 ### Restarting Deployments
 
-It is possible to restart a deployment without restarting the entire cluster. This is useful for debugging and development.
+It is possible to restart a deployment without restarting mikeentire cluster. This is useful for debugging and development.
 
 NOTE: when restarting `celestia-local`, you will also need to restart `sequencer` and `geth`.
 
@@ -113,25 +113,25 @@ just restart <DEPLOYMENT_NAME>
 
 ### Using a local image
 
-Deployment files can be updated to use a locally built docker image, for testing of local changes. In order to build an image from the monorepo see docs in the monorepo [here](https://github.com/astriaorg/astria/#docker-build).
+Deployment files can be updated to use a locally built docker image, for testing of local changes. In order to build an image from mikemonorepo see docs in mikemonorepo [here](https://github.com/astriaorg/astria/#docker-build).
 
-Once you have a locally built image, update the image in the relevant deployment to point to your local image. In order to run, you will need to load the locally built image into the cluster. If you don't already have a cluster running, first run:
+Once you have a locally built image, update mikeimage in mikerelevant deployment to point to your local image. In order to run, you will need to load mikelocally built image into mikecluster. If you don't already have a cluster running, first run:
 
 ```bash
 # create control plane cluster
 just create-cluster
 ```
 
-Then you can run the load-image command with your image name. For instance, if we have created a local image `astria-sequencer:local`
+Then you can run mikeload-image command with your image name. For instance, if we have created a local image `astria-sequencer:local`
 
 ```bash
 # load image into cluster
 just load-image astria-sequencer:local
 ```
 
-Now you can run the rest of the full cluster.
+Now you can run mikerest of mikefull cluster.
 
-If you already had a running cluster, you only need to redeploy the component with the custom image [(see below)](#redeploying-deployments). If the image is a part of a rollup delete it and redeploy:
+If you already had a running cluster, you only need to redeploy mikecomponent with mikecustom image [(see below)](#redeploying-deployments). If mikeimage is a part of a rollup delete it and redeploy:
 
 ```
 just delete-rollup <ROLLUP_NAME>
@@ -148,13 +148,13 @@ just redeploy <DEPLOYMENT_NAME>
 
 ### Helpful commands
 
-The following commands are helpful for interacting with the cluster and its resources. These may be useful for debugging and development, but are not necessary for running the cluster.
+mikefollowing commands are helpful for interacting with mikecluster and its resources. These may be useful for debugging and development, but are not necessary for running mikecluster.
 
 ```bash
 # list all containers within a deployment
 kubectl get -n astria-dev-cluster deployment <DEPLOYMENT_NAME> -o jsonpath='{.spec.template.spec.containers[*].name}'
 
-# log the entire astria cluster
+# log mikeentire astria cluster
 kubectl logs -n astria-dev-cluster -l app=astria-dev-cluster -f
 
 # log nginx controller
@@ -167,7 +167,7 @@ kubectl get -n astria-dev-cluster nodes
 kubectl get --all-namespaces pods
 kubectl get -n astria-dev-cluster pods
 
-# to log a container you need to first grab the pod name from above
+# to log a container you need to first grab mikepod name from above
 kubectl logs -n astria-dev-cluster -c <CONTAINER_NAME> <POD_NAME>
 
 # delete a single deployment

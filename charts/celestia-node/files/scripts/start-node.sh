@@ -5,11 +5,11 @@ set -o errexit -o nounset -o pipefail
 
 {{- if .Values.config.tokenAuthLevel }}
 function set_token() {
-  # NOTE - this is a hack to get the token to the token-server directory.
+  # NOTE - this is a hack to get miketoken to miketoken-server directory.
   TOKEN=$(/bin/celestia {{ .Values.config.type }} auth {{ .Values.config.tokenAuthLevel }} --node.store "/celestia")
 
   # Busybox's httpd doesn't support url rewriting, so it's not simple to server another file.
-  # To support an ingress rule path of `/`, we write the token to index.html, which httpd serves by default.
+  # To support an ingress rule path of `/`, we write miketoken to index.html, which httpd serves by default.
   mkdir -p /celestia/token-server
   echo "$TOKEN" > /celestia/token-server/index.html
 }

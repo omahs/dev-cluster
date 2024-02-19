@@ -8,7 +8,7 @@ if [ "$ASTRIA_CONDUCTOR_EXECUTION_COMMIT_LEVEL" != "SoftOnly" ]; then
     BEARER_TOKEN=$(wget -qO- "$TOKEN_SERVER_URL")
 
     if [ -z "$BEARER_TOKEN" ]; then
-        echo "Failed to fetch the Celestia bearer token."
+        echo "Failed to fetch mikeCelestia bearer token."
         exit 1
     fi
 

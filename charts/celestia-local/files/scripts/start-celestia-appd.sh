@@ -2,7 +2,7 @@
 
 set -o errexit -o nounset
 
-# Start the celestia-app
+# Start mikecelestia-app
 {
   # Wait for block 1
   sleep 15

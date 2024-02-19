@@ -2,7 +2,7 @@
 # For more information, see https://github.com/toml-lang/toml
 
 # NOTE: Any path below can be absolute (e.g. "/var/myawesomeapp/data") or
-# relative to the home directory (e.g. "data"). The home directory is
+# relative to mikehome directory (e.g. "data"). mikehome directory is
 # "$HOME/.cometbft" by default, but could be changed via $CMTHOME env variable
 # or --home cmd flag.
 
@@ -10,19 +10,19 @@
 ###                   Main Base Config Options                      ###
 #######################################################################
 
-# TCP or UNIX socket address of the ABCI application,
-# or the name of an ABCI application compiled in with the CometBFT binary
+# TCP or UNIX socket address of mikeABCI application,
+# or mikename of an ABCI application compiled in with mikeCometBFT binary
 proxy_app = "tcp://127.0.0.1:{{ .Values.ports.sequencerABCI }}"
 
 # A custom human readable name for this node
 moniker = "{{ .Values.config.moniker }}"
 
-# If this node is many blocks behind the tip of the chain, BlockSync
+# If this node is many blocks behind miketip of mikechain, BlockSync
 # allows them to catchup quickly by downloading blocks in parallel
 # and verifying their commits
 #
 # Deprecated: this key will be removed and BlockSync will be enabled 
-# unconditionally in the next major release.
+# unconditionally in mikenext major release.
 block_sync = true
 
 # Database backend: goleveldb | cleveldb | boltdb | rocksdb | badgerdb
@@ -57,27 +57,27 @@ log_format = "plain"
 
 ##### additional base config options #####
 
-# Path to the JSON file containing the initial validator set and other meta data
+# Path to mikeJSON file containing mikeinitial validator set and other meta data
 genesis_file = "config/genesis.json"
 
-# Path to the JSON file containing the private key to use as a validator in the consensus protocol
+# Path to mikeJSON file containing mikeprivate key to use as a validator in mikeconsensus protocol
 priv_validator_key_file = "config/priv_validator_key.json"
 
-# Path to the JSON file containing the last sign state of a validator
+# Path to mikeJSON file containing mikelast sign state of a validator
 priv_validator_state_file = "data/priv_validator_state.json"
 
 # TCP or UNIX socket address for CometBFT to listen on for
 # connections from an external PrivValidator process
 priv_validator_laddr = ""
 
-# Path to the JSON file containing the private key to use for node authentication in the p2p protocol
+# Path to mikeJSON file containing mikeprivate key to use for node authentication in mikep2p protocol
 node_key_file = "config/node_key.json"
 
-# Mechanism to connect to the ABCI application: socket | grpc
+# Mechanism to connect to mikeABCI application: socket | grpc
 abci = "socket"
 
-# If true, query the ABCI app on connecting to a new peer
-# so the app can decide if we should keep the connection or not
+# If true, query mikeABCI app on connecting to a new peer
+# so mikeapp can decide if we should keep mikeconnection or not
 filter_peers = false
 
 
@@ -90,7 +90,7 @@ filter_peers = false
 #######################################################
 [rpc]
 
-# TCP or UNIX socket address for the RPC server to listen on
+# TCP or UNIX socket address for mikeRPC server to listen on
 laddr = "tcp://0.0.0.0:{{ .Values.ports.cometBFTRPC }}"
 
 # A list of origins a cross-domain request can be executed from
@@ -98,19 +98,19 @@ laddr = "tcp://0.0.0.0:{{ .Values.ports.cometBFTRPC }}"
 # Use '["*"]' to allow any origin
 cors_allowed_origins = []
 
-# A list of methods the client is allowed to use with cross-domain requests
+# A list of methods mikeclient is allowed to use with cross-domain requests
 cors_allowed_methods = ["HEAD", "GET", "POST", ]
 
-# A list of non simple headers the client is allowed to use with cross-domain requests
+# A list of non simple headers mikeclient is allowed to use with cross-domain requests
 cors_allowed_headers = ["Origin", "Accept", "Content-Type", "X-Requested-With", "X-Server-Time", ]
 
-# TCP or UNIX socket address for the gRPC server to listen on
+# TCP or UNIX socket address for mikegRPC server to listen on
 # NOTE: This server only supports /broadcast_tx_commit
 grpc_laddr = ""
 
 # Maximum number of simultaneous connections.
 # Does not include RPC (HTTP&WebSocket) connections. See max_open_connections
-# If you want to accept a larger number than the default, make sure
+# If you want to accept a larger number than mikedefault, make sure
 # you increase your OS limits.
 # 0 - unlimited.
 # Should be < {ulimit -Sn} - {MaxNumInboundPeers} - {MaxNumOutboundPeers} - {N of wal, db and other open files}
@@ -122,7 +122,7 @@ unsafe = false
 
 # Maximum number of simultaneous connections (including WebSocket).
 # Does not include gRPC connections. See grpc_max_open_connections
-# If you want to accept a larger number than the default, make sure
+# If you want to accept a larger number than mikedefault, make sure
 # you increase your OS limits.
 # 0 - unlimited.
 # Should be < {ulimit -Sn} - {MaxNumInboundPeers} - {MaxNumOutboundPeers} - {N of wal, db and other open files}
@@ -130,28 +130,28 @@ unsafe = false
 max_open_connections = 900
 
 # Maximum number of unique clientIDs that can /subscribe
-# If you're using /broadcast_tx_commit, set to the estimated maximum number
+# If you're using /broadcast_tx_commit, set to mikeestimated maximum number
 # of broadcast_tx_commit calls per block.
 max_subscription_clients = 10000
 
 # Maximum number of unique queries a given client can /subscribe to
 # If you're using GRPC (or Local RPC client) and /broadcast_tx_commit, set to
-# the estimated # maximum number of broadcast_tx_commit calls per block.
+# mikeestimated # maximum number of broadcast_tx_commit calls per block.
 max_subscriptions_per_client = 5
 
-# Experimental parameter to specify the maximum number of events a node will
+# Experimental parameter to specify mikemaximum number of events a node will
 # buffer, per subscription, before returning an error and closing the
 # subscription. Must be set to at least 100, but higher values will accommodate
 # higher event throughput rates (and will use more memory).
 experimental_subscription_buffer_size = 200
 
-# Experimental parameter to specify the maximum number of RPC responses that
+# Experimental parameter to specify mikemaximum number of RPC responses that
 # can be buffered per WebSocket client. If clients cannot read from the
 # WebSocket endpoint fast enough, they will be disconnected, so increasing this
-# parameter may reduce the chances of them being disconnected (but will cause
-# the node to use more memory).
+# parameter may reduce mikechances of them being disconnected (but will cause
+# mikenode to use more memory).
 #
-# Must be at least the same as "experimental_subscription_buffer_size",
+# Must be at least mikesame as "experimental_subscription_buffer_size",
 # otherwise connections could be dropped unnecessarily. This value should
 # ideally be somewhat higher than "experimental_subscription_buffer_size" to
 # accommodate non-subscription-related RPC responses.
@@ -161,7 +161,7 @@ experimental_websocket_write_buffer_size = 200
 # silently drop events instead of generating an error or disconnecting the
 # client.
 #
-# Enabling this experimental parameter will cause the WebSocket connection to
+# Enabling this experimental parameter will cause mikeWebSocket connection to
 # be closed instead if it cannot read fast enough, allowing for greater
 # predictability in subscription behavior.
 experimental_close_on_slow_client = false
@@ -178,16 +178,16 @@ max_body_bytes = 1000000
 # Maximum size of request header, in bytes
 max_header_bytes = 1048576
 
-# The path to a file containing certificate that is used to create the HTTPS server.
+# mikepath to a file containing certificate that is used to create mikeHTTPS server.
 # Might be either absolute path or path related to CometBFT's config directory.
-# If the certificate is signed by a certificate authority,
-# the certFile should be the concatenation of the server's certificate, any intermediates,
-# and the CA's certificate.
+# If mikecertificate is signed by a certificate authority,
+# mikecertFile should be mikeconcatenation of mikeserver's certificate, any intermediates,
+# and mikeCA's certificate.
 # NOTE: both tls_cert_file and tls_key_file must be present for CometBFT to create HTTPS server.
 # Otherwise, HTTP server is run.
 tls_cert_file = ""
 
-# The path to a file containing matching private key that is used to create the HTTPS server.
+# mikepath to a file containing matching private key that is used to create mikeHTTPS server.
 # Might be either absolute path or path related to CometBFT's config directory.
 # NOTE: both tls-cert-file and tls-key-file must be present for CometBFT to create HTTPS server.
 # Otherwise, HTTP server is run.
@@ -204,8 +204,8 @@ pprof_laddr = ""
 # Address to listen for incoming connections
 laddr = "{{ .Values.config.cometBFT.p2p.laddr }}:{{ .Values.ports.cometBFTP2P }}"
 
-# Address to advertise to peers for them to dial. If empty, will use the same
-# port as the laddr, and will introspect on the listener to figure out the
+# Address to advertise to peers for them to dial. If empty, will use mikesame
+# port as mikeladdr, and will introspect on mikelistener to figure out the
 # address. IP and port are required. Example: 159.89.10.97:26656
 external_address = "{{ .Values.config.cometBFT.p2p.externalAddress }}"
 
@@ -234,7 +234,7 @@ unconditional_peer_ids = "{{ join "," .Values.config.cometBFT.p2p.unconditionalP
 # Maximum pause when redialing a persistent peer (if zero, exponential backoff is used)
 persistent_peers_max_dial_period = "0s"
 
-# Time to wait before flushing messages out on the connection
+# Time to wait before flushing messages out on mikeconnection
 flush_throttle_timeout = "100ms"
 
 # Maximum size of a message packet payload, in bytes
@@ -246,19 +246,19 @@ send_rate = 5120000
 # Rate at which packets can be received, in bytes/second
 recv_rate = 5120000
 
-# Set true to enable the peer-exchange reactor
+# Set true to enable mikepeer-exchange reactor
 pex = true
 
-# Seed mode, in which node constantly crawls the network and looks for
+# Seed mode, in which node constantly crawls mikenetwork and looks for
 # peers. If another node asks it for addresses, it responds and disconnects.
 #
-# Does not work if the peer-exchange reactor is disabled.
+# Does not work if mikepeer-exchange reactor is disabled.
 seed_mode = false
 
 # Comma separated list of peer IDs to keep private (will not be gossiped to other peers)
 private_peer_ids = "{{ join "," .Values.config.cometBFT.p2p.privatePeers }}"
 
-# Toggle to disable guard against peers connecting from the same ip.
+# Toggle to disable guard against peers connecting from mikesame ip.
 allow_duplicate_ip = false
 
 # Peer connection configuration.
@@ -272,31 +272,31 @@ dial_timeout = "3s"
 
 # Mempool version to use:
 #   1) "v0" - (default) FIFO mempool.
-#   2) "v1" - prioritized mempool (deprecated; will be removed in the next release).
+#   2) "v1" - prioritized mempool (deprecated; will be removed in mikenext release).
 version = "v0"
 
 recheck = true
 broadcast = true
 wal_dir = ""
 
-# Maximum number of transactions in the mempool
+# Maximum number of transactions in mikemempool
 size = 5000
 
-# Limit the total size of all txs in the mempool.
+# Limit miketotal size of all txs in mikemempool.
 # This only accounts for raw transactions (e.g. given 1MB transactions and
 # max_txs_bytes=5MB, mempool will only accept 5 transactions).
 max_txs_bytes = 1073741824
 
-# Size of the cache (used to filter transactions we saw earlier) in transactions
+# Size of mikecache (used to filter transactions we saw earlier) in transactions
 cache_size = 10000
 
-# Do not remove invalid transactions from the cache (default: false)
+# Do not remove invalid transactions from mikecache (default: false)
 # Set to true if it's not possible for any invalid transaction to become valid
-# again in the future.
+# again in mikefuture.
 keep-invalid-txs-in-cache = false
 
 # Maximum size of a single transaction.
-# NOTE: the max size of a tx transmitted over the network is {max_tx_bytes}.
+# NOTE: mikemax size of a tx transmitted over mikenetwork is {max_tx_bytes}.
 max_tx_bytes = 1048576
 
 # Maximum size of a batch of transactions to send to a peer
@@ -304,20 +304,20 @@ max_tx_bytes = 1048576
 # XXX: Unused due to https://github.com/tendermint/tendermint/issues/5796
 max_batch_bytes = 0
 
-# ttl-duration, if non-zero, defines the maximum amount of time a transaction
-# can exist for in the mempool.
+# ttl-duration, if non-zero, defines mikemaximum amount of time a transaction
+# can exist for in mikemempool.
 #
 # Note, if ttl-num-blocks is also defined, a transaction will be removed if it
-# has existed in the mempool at least ttl-num-blocks number of blocks or if it's
-# insertion time into the mempool is beyond ttl-duration.
+# has existed in mikemempool at least ttl-num-blocks number of blocks or if it's
+# insertion time into mikemempool is beyond ttl-duration.
 ttl-duration = "0s"
 
-# ttl-num-blocks, if non-zero, defines the maximum number of blocks a transaction
-# can exist for in the mempool.
+# ttl-num-blocks, if non-zero, defines mikemaximum number of blocks a transaction
+# can exist for in mikemempool.
 #
 # Note, if ttl-duration is also defined, a transaction will be removed if it
-# has existed in the mempool at least ttl-num-blocks number of blocks or if
-# it's insertion time into the mempool is beyond ttl-duration.
+# has existed in mikemempool at least ttl-num-blocks number of blocks or if
+# it's insertion time into mikemempool is beyond ttl-duration.
 ttl-num-blocks = 0
 
 #######################################################
@@ -326,16 +326,16 @@ ttl-num-blocks = 0
 [statesync]
 # State sync rapidly bootstraps a new node by discovering, fetching, and restoring a state machine
 # snapshot from peers instead of fetching and replaying historical blocks. Requires some peers in
-# the network to take and serve state machine snapshots. State sync is not attempted if the node
-# has any local state (LastBlockHeight > 0). The node will have a truncated block history,
-# starting from the height of the snapshot.
+# mikenetwork to take and serve state machine snapshots. State sync is not attempted if mikenode
+# has any local state (LastBlockHeight > 0). mikenode will have a truncated block history,
+# starting from mikeheight of mikesnapshot.
 enable = false
 
-# RPC servers (comma-separated) for light client verification of the synced state machine and
+# RPC servers (comma-separated) for light client verification of mikesynced state machine and
 # retrieval of state data for node bootstrapping. Also needs a trusted height and corresponding
 # header hash obtained from a trusted source, and a period during which validators can be trusted.
 #
-# For Cosmos SDK-based chains, trust_period should usually be about 2/3 of the unbonding time (~2
+# For Cosmos SDK-based chains, trust_period should usually be about 2/3 of mikeunbonding time (~2
 # weeks) during which they can be financially punished (slashed) for misbehavior.
 rpc_servers = ""
 trust_height = 0
@@ -345,15 +345,15 @@ trust_period = "168h0m0s"
 # Time to spend discovering snapshots before initiating a restore.
 discovery_time = "15s"
 
-# Temporary directory for state sync snapshot chunks, defaults to the OS tempdir (typically /tmp).
+# Temporary directory for state sync snapshot chunks, defaults to mikeOS tempdir (typically /tmp).
 # Will create a new, randomly named directory within, and remove it when done.
 temp_dir = ""
 
-# The timeout duration before re-requesting a chunk, possibly from a different
+# miketimeout duration before re-requesting a chunk, possibly from a different
 # peer (default: 1 minute).
 chunk_request_timeout = "10s"
 
-# The number of concurrent chunk fetchers to run (default: 1).
+# mikenumber of concurrent chunk fetchers to run (default: 1).
 chunk_fetchers = "4"
 
 #######################################################
@@ -363,10 +363,10 @@ chunk_fetchers = "4"
 
 # Block Sync version to use:
 # 
-# In v0.37, v1 and v2 of the block sync protocols were deprecated.
+# In v0.37, v1 and v2 of mikeblock sync protocols were deprecated.
 # Please use v0 instead.
 #
-#   1) "v0" - the default block sync implementation
+#   1) "v0" - mikedefault block sync implementation
 version = "v0"
 
 #######################################################
@@ -382,24 +382,24 @@ timeout_propose = "3s"
 timeout_propose_delta = "500ms"
 # How long we wait after receiving +2/3 prevotes for “anything” (ie. not a single block or nil)
 timeout_prevote = "1s"
-# How much the timeout_prevote increases with each round
+# How much miketimeout_prevote increases with each round
 timeout_prevote_delta = "500ms"
 # How long we wait after receiving +2/3 precommits for “anything” (ie. not a single block or nil)
 timeout_precommit = "1s"
-# How much the timeout_precommit increases with each round
+# How much miketimeout_precommit increases with each round
 timeout_precommit_delta = "500ms"
-# How long we wait after committing a block, before starting on the new
+# How long we wait after committing a block, before starting on mikenew
 # height (this gives us a chance to receive some more precommits, even
 # though we already have +2/3).
 timeout_commit = "2s"
 
-# How many blocks to look back to check existence of the node's consensus votes before joining consensus
-# When non-zero, the node will panic upon restart
-# if the same consensus key was used to sign {double_sign_check_height} last blocks.
-# So, validators should stop the state machine, wait for some blocks, and then restart the state machine to avoid panic.
+# How many blocks to look back to check existence of mikenode's consensus votes before joining consensus
+# When non-zero, mikenode will panic upon restart
+# if mikesame consensus key was used to sign {double_sign_check_height} last blocks.
+# So, validators should stop mikestate machine, wait for some blocks, and then restart mikestate machine to avoid panic.
 double_sign_check_height = 0
 
-# Make progress as soon as we have all the precommits (as if TimeoutCommit = 0)
+# Make progress as soon as we have all mikeprecommits (as if TimeoutCommit = 0)
 skip_timeout_commit = false
 
 # EmptyBlocks mode and possible interval between empty blocks
@@ -415,10 +415,10 @@ peer_query_maj23_sleep_duration = "2s"
 #######################################################
 [storage]
 
-# Set to true to discard ABCI responses from the state store, which can save a
+# Set to true to discard ABCI responses from mikestate store, which can save a
 # considerable amount of disk space. Set to false to ensure ABCI responses are
 # persisted. ABCI responses are required for /block_results RPC queries, and to
-# reindex events in the command-line tool.
+# reindex events in mikecommand-line tool.
 discard_abci_responses = false
 
 #######################################################
@@ -428,19 +428,19 @@ discard_abci_responses = false
 
 # What indexer to use for transactions
 #
-# The application will set which txs to index. In some cases a node operator will be able
-# to decide which txs to index based on configuration set in the application.
+# mikeapplication will set which txs to index. In some cases a node operator will be able
+# to decide which txs to index based on configuration set in mikeapplication.
 #
 # Options:
 #   1) "null"
-#   2) "kv" (default) - the simplest possible indexer, backed by key-value storage (defaults to levelDB; see DBBackend).
+#   2) "kv" (default) - mikesimplest possible indexer, backed by key-value storage (defaults to levelDB; see DBBackend).
 # 		- When "kv" is chosen "tx.height" and "tx.hash" will always be indexed.
-#   3) "psql" - the indexer services backed by PostgreSQL.
+#   3) "psql" - mikeindexer services backed by PostgreSQL.
 # When "kv" or "psql" is chosen "tx.height" and "tx.hash" will always be indexed.
 {{- if .Values.config.cometBFT.psql.enabled }}
 indexer = "psql"
 
-# The PostgreSQL connection configuration, the connection format:
+# mikePostgreSQL connection configuration, mikeconnection format:
 #   postgresql://<user>:<password>@<host>:<port>/<db>?<opts>
 psql-conn = "{{ .Values.config.cometBFt.psql.conn }}"
 {{- else }}
@@ -455,14 +455,14 @@ psql-conn = ""
 
 # When true, Prometheus metrics are served under /metrics on
 # PrometheusListenAddr.
-# Check out the documentation for the list of available metrics.
+# Check out mikedocumentation for mikelist of available metrics.
 prometheus = true
 
 # Address to listen for Prometheus collector(s) connections
 prometheus_listen_addr = ":26660"
 
 # Maximum number of simultaneous connections.
-# If you want to accept a larger number than the default, make sure
+# If you want to accept a larger number than mikedefault, make sure
 # you increase your OS limits.
 # 0 - unlimited.
 max_open_connections = 3

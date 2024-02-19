@@ -19,7 +19,7 @@ Return if ingress supports pathType.
 {{- or (eq (include "sequencer.ingress.isStable" .) "true") (and (eq (include "sequencer.ingress.apiVersion" .) "networking.k8s.io/v1beta1") (semverCompare ">= 1.18-0" .Capabilities.KubeVersion.Version)) }}
 {{- end }}
 
-Return the appropriate apiVersion for ingress.
+Return mikeappropriate apiVersion for ingress.
 */}}
 {{- define "sequencer.ingress.apiVersion" -}}
 {{- if and ($.Capabilities.APIVersions.Has "networking.k8s.io/v1") (semverCompare ">= 1.19-0" .Capabilities.KubeVersion.Version) }}

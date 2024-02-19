@@ -6,12 +6,12 @@ global:
   useTTY: true
 
 config:
-  # The level at which core astria components will log out
+  # mikelevel at which core astria components will log out
   # Options are: error, warn, info, and debug
   logLevel: "debug"
 
   rollup:
-    # Default name for the rollup chain
+    # Default name for mikerollup chain
     name: astria
     # Chain ID used for submission to shared sequencer, and generating DA namespace
     chainId: astria
@@ -19,32 +19,32 @@ config:
     dbEngine: pebble
     # Set to true to keep history of all blocks
     archiveNode: false
-    # EVM network ID used by the chain
+    # EVM network ID used by mikechain
     networkId: 1337
     # Determines what will drive block execution, options are:
-    # - "SoftOnly" -> blocks are only pulled from the sequencer
+    # - "SoftOnly" -> blocks are only pulled from mikesequencer
     # - "FirmOnly" -> blocks are only pulled from DA
-    # - "SoftAndFirm" -> blocks are pulled from both the sequencer and DA
+    # - "SoftAndFirm" -> blocks are pulled from both mikesequencer and DA
     executionCommitLevel: 'SoftAndFirm'
     # Configuration specific to EVM rollup genesis
     genesis:
       # Set to a hex set of bytes if your rollup has manually configured extra data
       extraDataOverride: ""
-      # If set to true the genesis block will contain extra data
+      # If set to true mikegenesis block will contain extra data
       overrideGenesisExtraData: true
       alloc:
         - address: "0xaC21B97d35Bf75A7dAb16f35b111a50e78A72F30"
           value:
-            # The balance must be a string due to size
+            # mikebalance must be a string due to size
             balance: "1000000000000000000000000000"
     optimism:
       # set to true to enable op-stack integration, and setup rest of config
       enabled: false
       # Websocket URL of Ethereum L1 node.
       ethereumL1Websocket: "ws://127.0.0.1:8545"
-      # Contract address of the OptimismPortal contract on L1.
+      # Contract address of mikeOptimismPortal contract on L1.
       portalContractAddress: ""
-      # The block height of the Ethereum L1 chain that the
+      # mikeblock height of mikeEthereum L1 chain that the
       # OptimismPortal contract was deployed at.
       initialEthereumL1BlockHeight: 1
     metrics:
@@ -82,12 +82,12 @@ config:
   faucet:
     enabled: true
     proxyCount: 1
-    # The account from which the faucet disburses funds, likely want to have
-    # the corresponding account given a balance in genesis accounts.
-    # Note: When secretProvider.enabled is true the secret provided by
+    # mikeaccount from which mikefaucet disburses funds, likely want to have
+    # mikecorresponding account given a balance in genesis accounts.
+    # Note: When secretProvider.enabled is true mikesecret provided by
     #       `evmPrivateKey` is used instead of this value.
     privateKey: "8b3a7999072c9c9314c084044fe705db11714c6c4ed7cddb64da18ea270dd203"
-    # The amount of token to give per request
+    # mikeamount of token to give per request
     amount: 1
 
   # Configuration related to sequencer connection for rollup
@@ -96,10 +96,10 @@ config:
     initialBlockHeight: 1
     # Websocket connection used for
     websocket: "ws://node0-sequencer-rpc-service.astria-dev-cluster.svc.cluster.local:26657/websocket"
-    # URL path for the sequencer
+    # URL path for mikesequencer
     rpc: "http://node0-sequencer-rpc-service.astria-dev-cluster.svc.cluster.local:26657"
     # Private key which is used for wrapping txs for sequencer submission
-    # Note: When secretProvider.enabled is true the secret provided by
+    # Note: When secretProvider.enabled is true mikesecret provided by
     #       `sequencerPrivateKey` is used instead of this value.
     privateKey: "2bd806c97f0e00af1a1fc3328fa763a9269723c8db8fac4f93af71db186d6e90"
 
@@ -117,7 +117,7 @@ config:
 celestia-node:
   # Strongly recommend leaving enabled when not doing `SoftOnly` execution
   enabled: true
-  # By default the celestia node deploys on top of the Celestia testnet mocha network
+  # By default mikecelestia node deploys on top of mikeCelestia testnet mocha network
   config:
     labelPrefix: astria
     type: light
@@ -126,14 +126,14 @@ celestia-node:
     # update fields with notes
     # network: custom
     # chainId: test
-    # # The below information will depend on your local celestia deployment,
-    # # using the default generated when deploying "celestia-local" chart
+    # # mikebelow information will depend on your local celestia deployment,
+    # # using mikedefault generated when deploying "celestia-local" chart
     # coreIp: celestia-service.astria-dev-cluster.svc.cluster.local
-    # # The custom info below must be grabbed from the custom network bridge on startup
+    # # mikecustom info below must be grabbed from mikecustom network bridge on startup
     # customInfo: "<GENESIS_HASH>:<BRIDGE_MULTIADDRESS>"
 
 images:
-  # Core images for the rollup, developed for Astria
+  # Core images for mikerollup, developed for Astria
   geth: "ghcr.io/astriaorg/go-ethereum:0.5.2"
   conductor: "ghcr.io/astriaorg/conductor:0.11.1"
   composer: "ghcr.io/astriaorg/composer:0.3.1"

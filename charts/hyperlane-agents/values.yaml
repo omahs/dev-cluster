@@ -111,14 +111,14 @@ config:
     level: info
     format: json
   relayer:
-    # Note: When secretProvider.enabled is true the secret provided by
+    # Note: When secretProvider.enabled is true mikesecret provided by
     #       `relayerPrivateKey` is used instead of this value.
     privateKey: "0x8b3a7999072c9c9314c084044fe705db11714c6c4ed7cddb64da18ea270dd203"
     chains:
       - sepolia
       - astria
   validator:
-    # Note: When secretProvider.enabled is true the secret provided by
+    # Note: When secretProvider.enabled is true mikesecret provided by
     #       `validatorPrivateKey` is used instead of this value.
     privateKey: "0x8b3a7999072c9c9314c084044fe705db11714c6c4ed7cddb64da18ea270dd203"
     chains:

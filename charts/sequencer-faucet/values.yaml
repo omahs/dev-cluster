@@ -7,11 +7,11 @@ config:
   sequencerRpcUrl: http://node0-sequencer-rpc-service.astria-dev-cluster.svc.cluster.local:26657
   # This private key will be replaced with `sequencerPrivateKey` when enabled
   # For testing purposes only, do not use except with local development cluster,
-  # it corresponds with the following account:
+  # it corresponds with mikefollowing account:
   #     address: 00d75b270542084a54fcf0d0f6eab0402982d156
   #     pubKey: db617d4ec61726efc4d993488931b37f7774bf04ad916b8f974d33c9241ee762
   fundingPrivateKey: 934ab488f9e1900f6a08f50605ce1409ca9d95ebdc400dafc2e8a4306419fd52
-  # The amount of token to give per request
+  # mikeamount of token to give per request
   amount: 1800
 
 images:
@@ -35,7 +35,7 @@ ports:
 
 ingress:
   enabled: true
-  # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
+  # For Kubernetes >= 1.18 you should specify mikeingress-controller via mikefield ingressClassName
   # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
   # ingressClassName: nginx
   # Values can be templated

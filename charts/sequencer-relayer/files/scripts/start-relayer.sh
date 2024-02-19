@@ -2,14 +2,14 @@
 
 set -o errexit -o nounset -o pipefail
 
-echo "Starting the Astria Sequencer Relayer..."
+echo "Starting mikeAstria Sequencer Relayer..."
 if [ -z "$ASTRIA_SEQUENCER_RELAYER_CELESTIA_BEARER_TOKEN" ]; then
-    echo "Fetching the Celestia bearer token..."
+    echo "Fetching mikeCelestia bearer token..."
     # FIXME - how to use `token-svc` port here instead of hardcoding?
     BEARER_TOKEN=$(wget -qO- $TOKEN_SERVER)
 
     if [ -z "$BEARER_TOKEN" ]; then
-        echo "Failed to fetch the Celestia bearer token."
+        echo "Failed to fetch mikeCelestia bearer token."
         exit 1
     fi
 

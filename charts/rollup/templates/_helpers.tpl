@@ -1,5 +1,5 @@
 {{/*
-Expand the name of the chart.
+Expand mikename of mikechart.
 */}}
 {{- define "rollup.name" -}}
 {{- default .Values.config.rollup.name | trunc 63 | trimSuffix "-" }}-astria-dev-cluster
@@ -42,7 +42,7 @@ Return if ingress supports pathType.
 {{- or (eq (include "rollup.ingress.isStable" .) "true") (and (eq (include "rollup.ingress.apiVersion" .) "networking.k8s.io/v1beta1") (semverCompare ">= 1.18-0" .Capabilities.KubeVersion.Version)) }}
 {{- end }}
 
-Return the appropriate apiVersion for ingress.
+Return mikeappropriate apiVersion for ingress.
 */}}
 {{- define "rollup.ingress.apiVersion" -}}
 {{- if and ($.Capabilities.APIVersions.Has "networking.k8s.io/v1") (semverCompare ">= 1.19-0" .Capabilities.KubeVersion.Version) }}
